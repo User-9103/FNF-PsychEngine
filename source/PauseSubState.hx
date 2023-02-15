@@ -60,7 +60,6 @@ class PauseSubState extends MusicBeatSubstate
 		}
 		difficultyChoices.push('BACK');
 
-
 		pauseMusic = new FlxSound();
 		if(songName != null) {
 			pauseMusic.loadEmbedded(Paths.music(songName), true, true);
@@ -134,10 +133,17 @@ class PauseSubState extends MusicBeatSubstate
 		regenMenu();
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 
-                #if android
-                addVirtualPad(UP_DOWN, A);
-                addPadCamera();
-                #end
+		#if android
+		if (PlayState.chartingMode)
+		{
+			addVirtualPad(LEFT_FULL, A);
+		}
+		else
+		{
+			addVirtualPad(UP_DOWN, A);
+		}
+		addPadCamera();
+		#end
 	}
 
 	var holdTime:Float = 0;
